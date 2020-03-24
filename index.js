@@ -1,3 +1,4 @@
+//server side code!!
 var express = require('express');
 var socket = require('socket.io');
 
@@ -15,10 +16,15 @@ var io = socket(server);
 
 io.on('connection', function(socket){
     console.log('connected to socket', socket.id);
+    console.log('connection fn firing - server side');
+
     socket.on('chat', function(data){
+        console.log('on chat, server side');
         io.sockets.emit('chat', data);
     });
     socket.on('typing',function(data){
+        console.log('on typing, server side');
+
         socket.broadcast.emit('typing', data)
     });
 });

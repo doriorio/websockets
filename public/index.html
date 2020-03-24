@@ -4,11 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebSockets 101</title>
-    <script src="/socket.io.js"></script><body>
+    <script src="/socket.io.js"></script>
     <link href="/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-
+<style>
+    #weather {
+        background-color: blue;
+        height: 120px;
+        align-items: center;
+    }
+    button:hover {
+        outline: none;
+    }
+</style>
 </head>
+<body>
+    
+
+<div id="weather">
+    <button id="thisButton">Get a random emoji</button>
+    <h2 class="emoji-field">
+    </h2>
+</div>
 <div id="mario-chat">
     <div id="chat-window">
         <div id="output"></div>
@@ -20,6 +37,18 @@
 </div>
 </div>
 <script src="/chat.js"></script>
-    
+<script>
+    var img = document.querySelector('h2');
+    function getRandom() {
+        console.log('in get random')
+        fetch('https://ranmoji.herokuapp.com/emojis/api/v.1.0/')
+        .then(response => {
+            response.json().then(data =>{
+                console.log('response data', data.emoji)
+                img.innerHTML = (data.emoji)
+            })
+        });
+    }
+</script>
 </body>
 </html>
